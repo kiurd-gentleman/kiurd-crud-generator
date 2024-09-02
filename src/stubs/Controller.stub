@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\{{modelName}};
+use App\Http\Requests\Store{{modelName}}Request;
+use App\Http\Requests\Update{{modelName}}Request;
+use Illuminate\Http\Response;
+
+class {{modelName}}Controller extends Controller
+{
+    public function index()
+    {
+        return {{modelName}}::all();
+    }
+
+    public function store(Store{{modelName}}Request $request)
+    {
+        return {{modelName}}::create($request->validated());
+    }
+
+    public function show({{modelName}} ${{modelName}})
+    {
+        return ${{modelName}};
+    }
+
+    public function update(Update{{modelName}}Request $request, {{modelName}} ${{modelName}})
+    {
+        ${{modelName}}->update($request->validated());
+        return ${{modelName}};
+    }
+
+    public function destroy({{modelName}} ${{modelName}})
+    {
+        ${{modelName}}->delete();
+        return response(null, Response::HTTP_NO_CONTENT);
+    }
+}

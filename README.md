@@ -4,7 +4,7 @@
 
 for the technical task package we need to install the package
 ```bash
-composer require krimt/kiurd-crud-generator:dev-master
+composer require krimt/kiurd-crud-generator
 
 ```
 For resource publish run the following command

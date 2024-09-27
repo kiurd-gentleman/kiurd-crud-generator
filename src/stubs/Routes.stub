@@ -1,0 +1,1 @@
+Route::apiResource('{{modelNamePluralLowerCase}}', App\Http\Controllers\{{modelName}}Controller::class);

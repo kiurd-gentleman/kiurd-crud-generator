@@ -9,10 +9,10 @@
     "generator",
     "json"
   ],
-  "homepage": "https://github.com/kiurd-gentleman/kiurd-crud-generator",
+  "homepage": "https://github.com/kiurd-gentleman/laravel-crud-generator",
   "support": {
-    "issues": "https://github.com/kiurd-gentleman/kiurd-crud-generator/issues",
-    "source": "https://github.com/kiurd-gentleman/kiurd-crud-generator"
+    "issues": "https://github.com/kiurd-gentleman/laravel-crud-generator/issues",
+    "source": "https://github.com/kiurd-gentleman/laravel-crud-generator"
   },
   "autoload": {
     "psr-4": {

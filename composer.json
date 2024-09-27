@@ -1,6 +1,6 @@
 {
   "name": "krimt/laravel-crud-generator",
-  "description": "A Laravel package to generate CRUD API from a JSON file",
+  "description": "A Laravel package to generate CRUD operation.",
   "license": "MIT",
   "keywords": [
     "laravel",

@@ -3,6 +3,7 @@
 namespace Krimt\ApiFirstCrudPackage\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -49,17 +50,26 @@ class ApiCrudGeneratorCommand extends Command
         );
 
         file_put_contents(app_path("/Models/{$name}.php"), $modelTemplate);
+
         $this->info('Model generated successfully.');
     }
 
     protected function generateMigration($name)
     {
-        // if migration already exists
-        if ($this->fileExists(database_path("/migrations"), 'Migration')) {
-            return;
-        }
-
+        $name = Str::studly($name);
         $tableName = Str::plural(Str::snake($name));
+
+        // Get all migration file names
+        $migrationFiles = scandir(database_path('migrations'));
+        $migrationFiles = array_diff($migrationFiles, array('.', '..'));
+
+        // Check if a migration file for the table already exists
+        foreach ($migrationFiles as $file) {
+            if (strpos($file, "create_{$tableName}_table") !== false) {
+                $this->error('Migration already exists!');
+                return;
+            }
+        }
 
         $migrationName = date('Y_m_d_His') . "_create_{$tableName}_table.php";
 
@@ -70,6 +80,8 @@ class ApiCrudGeneratorCommand extends Command
         );
 
         file_put_contents(database_path("/migrations/{$migrationName}"), $migrationTemplate);
+
+        $this->info('Migration generated successfully.');
     }
 
     protected function generateController($name)
@@ -85,6 +97,8 @@ class ApiCrudGeneratorCommand extends Command
         );
 
         file_put_contents(app_path("/Http/Controllers/{$name}Controller.php"), $controllerTemplate);
+
+        $this->info('Controller generated successfully.');
     }
 
     protected function generateRequests($name)
@@ -112,6 +126,8 @@ class ApiCrudGeneratorCommand extends Command
 
         file_put_contents(app_path("/Http/Requests/Store{$name}Request.php"), $StoreRequestTemplate);
         file_put_contents(app_path("/Http/Requests/Update{$name}Request.php"), $UpdateRequestTemplate);
+
+        $this->info('Requests generated successfully.');
     }
 
     protected function generateRoutes($name)
@@ -131,6 +147,8 @@ class ApiCrudGeneratorCommand extends Command
         );
 
         file_put_contents(base_path("routes/api.php"), $routesTemplate, FILE_APPEND);
+
+        $this->info('Routes generated successfully.');
     }
 
     protected function getStub($type)
